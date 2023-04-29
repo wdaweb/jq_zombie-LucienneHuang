@@ -93,13 +93,13 @@
             display: none;
         }
 
-        .score-text {
-            animation-name: score-text;
+        .opacity {
+            animation-name: opacity;
             animation-duration: 2s;
             animation-iteration-count: 1;
         }
 
-        @keyframes score-text {
+        @keyframes opacity {
             from {
                 opacity: 0;
             }
@@ -384,7 +384,10 @@
 
         .blood {
             /* 忽略點擊事件 */
+            position: absolute;
+            width: 850px;
             pointer-events: none;
+            display: none;
         }
 
         .swal2-icon-content {
@@ -511,7 +514,7 @@
         const catScore = [-10, -3, -2, -1, 10, 3, 2, 1]
         const addTime = 5
         // 生命
-        let life = 3
+        let life = 0
         // 分數
         let score = 0
         // 剩餘秒數
@@ -648,6 +651,8 @@
             score = 0
             life = 2
             mode = 'survival'
+            $('#game').append(' <img src="./images/blood_background.png" class="blood" id="top">')
+            $('#game').append('<img src="./images/blood_background.png" class="blood" style="bottom: 0;transform: rotate(180deg);" id="bottom">')
             $('#game').append('<img src="./images/heart.png" class="heart">')
             $('#game').append('<img src="./images/heart.png" class="heart" style="left: 50px;">')
             $('#game').append('<img src="./images/heart.png" class="heart" style="left: 100px;">')
@@ -694,6 +699,8 @@
                     // 遊戲區域清空
                     $('#timer-text').css('display', 'none')
                     $('#score-text').css('display', 'none')
+                    $('.blood').css('display', 'none')
+                    $('.blood').removeClass('opacity')
                     $('#game img').remove()
                     // 重新顯示開始按鈕和背景
                     $('#btn-start').fadeIn();
@@ -756,6 +763,8 @@
                     $('#game img').remove()
                     $('#timer-text').css('display', 'none')
                     $('#score-text').css('display', 'none')
+                    $('.blood').css('display', 'none')
+                    $('.blood').removeClass('opacity')
                     // 重新顯示開始按鈕和背景
                     $('#btn-start').fadeIn();
                     $('#start').fadeIn();
@@ -829,6 +838,7 @@
             // 如果模式為survival且按到的貓咪分數是負的
             if (mode === 'survival' && parseInt(catScore[$(this).attr('alt').slice(-1)]) < 0) {
                 // 畫面+生命震動效果
+
                 $('.heart').addClass('shake')
                 $('#game').addClass('shake')
                 $('.heart').eq(life).remove()
@@ -840,6 +850,13 @@
                 }, 1000)
                 // 生命值-1
                 life--
+                if (life === 1) {
+                    $('#top').css('display', 'block')
+                    $('#top').addClass('opacity')
+                } else {
+                    $('#bottom').css('display', 'block')
+                    $('#bottom').addClass('opacity')
+                }
             }
             // 如果按到的貓咪的分數是負的
             if (parseInt(catScore[$(this).attr('alt').slice(-1)]) < 0) {
@@ -890,11 +907,11 @@
         $('#history').click(function () {
             if ($('#score-list').css('display') === 'block') {
                 $('#score-list').css('display', 'none')
-                $('#score-list').removeClass('score-text')
+                $('#score-list').removeClass('opacity')
 
             } else {
                 $('#score-list').css('display', 'block')
-                $('#score-list').addClass('score-text')
+                $('#score-list').addClass('opacity')
 
             }
         })
