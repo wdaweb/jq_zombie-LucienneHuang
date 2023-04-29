@@ -501,8 +501,6 @@
             <li>Survival mode</li>
             <li>>>最高分玩家: <span id="text-highscorename-s">沒有人</span></li>
             <li>>>最高分分數: <span id="text-highscore-s">0</span></li>
-            <li>>>最低分玩家: <span id="text-lowscorename-s">沒有人</span></li>
-            <li>>>最低分分數: <span id="text-lowscore-s">0</span></li>
         </ul>
     </div>
 
@@ -530,16 +528,12 @@
         let highscore_n = localStorage.cat_n ? JSON.parse(localStorage.cat_n) : { name: '沒有人', score: 0 }
         let lowscore_n = localStorage.lowcat_n ? JSON.parse(localStorage.lowcat_n) : { name: '沒有人', score: 0 }
         let highscore_s = localStorage.cat_s ? JSON.parse(localStorage.cat_s) : { name: '沒有人', score: 0 }
-        let lowscore_s = localStorage.lowcat_s ? JSON.parse(localStorage.lowcat_s) : { name: '沒有人', score: 0 }
         $('#text-highscorename-n').text(highscore_n.name)
         $('#text-highscore-n').text(highscore_n.score)
         $('#text-lowscorename-n').text(lowscore_n.name)
         $('#text-lowscore-n').text(lowscore_n.score)
-
         $('#text-highscorename-s').text(highscore_s.name)
         $('#text-highscore-s').text(highscore_s.score)
-        $('#text-lowscorename-s').text(lowscore_s.name)
-        $('#text-lowscore-s').text(lowscore_s.score)
         $('#btn-start').click(function () {
             $('#btn-start').fadeOut();
             $('#box').css('display', 'block')
@@ -727,27 +721,6 @@
                             localStorage.cat_s = JSON.stringify(highscore_s)
                         })
 
-                    } else if (score < lowscore_s.score) {
-                        Swal.fire({
-                            icon: 'info',
-                            title: '時間到',
-                            title: `你好爛喔...最低分，你得到 ${score} 分`,
-                            input: 'text',
-                            inputPlaceholder: '請輸入玩家名字',
-                            inputAttributes: {
-                                required: true
-                            },
-                            validationMessage: '名稱必填',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false
-                        }).then(function (result) {
-                            lowscore_s.name = result.value
-                            lowscore_s.score = score
-                            $('#text-lowscorename-s').text(lowscore_s.name)
-                            $('#text-lowscore-s').text(lowscore_s.score)
-                            localStorage.lowcat_s = JSON.stringify(lowscore_s)
-                        })
-
                     } else {
                         Swal.fire({
                             icon: 'info',
@@ -788,27 +761,6 @@
                             $('#text-highscorename-s').text(highscore_s.name)
                             $('#text-highscore-s').text(highscore_s.score)
                             localStorage.cat_s = JSON.stringify(highscore_s)
-                        })
-
-                    } else if (score < lowscore_s.score) {
-                        Swal.fire({
-                            icon: 'info',
-                            title: '時間到',
-                            title: `你好爛喔...最低分，你得到 ${score} 分`,
-                            input: 'text',
-                            inputPlaceholder: '請輸入玩家名字',
-                            inputAttributes: {
-                                required: true
-                            },
-                            validationMessage: '名稱必填',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false
-                        }).then(function (result) {
-                            lowscore_s.name = result.value
-                            lowscore_s.score = score
-                            $('#text-lowscorename-s').text(lowscore_s.name)
-                            $('#text-lowscore-s').text(lowscore_s.score)
-                            localStorage.lowcat_s = JSON.stringify(lowscore_s)
                         })
 
                     } else {
