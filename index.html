@@ -405,6 +405,7 @@
     <audio id="cafe" src="./music/cafe.mp3"></audio>
     <audio id="meow" src="./music/meow.mp3"></audio>
     <audio id="angrymeow" src="./music/angrymeow.mp3"></audio>
+    <audio id="potion" src="./music/potion.mp3"></audio>
     <div id="title">
         <a href="index.html" alt="貓咪咖啡廳" title="貓咪咖啡廳">貓咪咖啡廳</a><br>
 
@@ -874,6 +875,7 @@
         })
         // 點選時間藥水，秒數+5s且點選的該藥水消失
         $('#game').on('click', '.timepotion', function () {
+            $('#potion')[0].play()
             countdown += 5
             $('#timer-text').text(countdown + 's')
             $(this).css('display', 'none')
