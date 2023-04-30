@@ -232,6 +232,8 @@
         }
 
         .heart {
+            width: 50px;
+            height: 50px;
             position: absolute;
             pointer-events: none;
             bottom: 0;
@@ -428,6 +430,7 @@
                         <span class="content">只能拍屁屁，知道嗎？</span>
                         <span class="content">愚蠢的人類。</span>
                         <span class="content">可以再給你五秒鐘的好東西</span>
+                        <span class="content">全部消失時會發生什麼事呢...?</span>
                     </div>
                 </div>
                 <div id="all">
@@ -459,12 +462,15 @@
                         </tr>
                         <tr>
                             <td colspan="2">Survial only: </td>
-                            <td colspan="2" style="text-align: center
+                            <td style="text-align: center
                             ;"><img src="./images/timepotion_s.png" class="small" id="timepotion"></td>
+                            <td style="text-align: center
+                            ;"><img src="./images/heart_s.png" class="small" id="heart"></td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center;"></td>
-                            <td colspan="2" style="text-align: center;">+5s</td>
+                            <td style="text-align: center;">+5s</td>
+                            <td style="text-align: center;">???</td>
                         </tr>
                     </table>
                     <hr>
@@ -588,7 +594,7 @@
                         Swal.fire({
                             icon: 'info',
                             title: '時間到',
-                            title: `最高分，你得到 ${score} 分`,
+                            text: `最高分，你得到 ${score} 分`,
                             input: 'text',
                             inputPlaceholder: '請輸入玩家名字',
                             inputAttributes: {
@@ -609,7 +615,7 @@
                         Swal.fire({
                             icon: 'info',
                             title: '時間到',
-                            title: `你好爛喔...最低分，你得到 ${score} 分`,
+                            text: `你好爛喔...最低分，你得到 ${score} 分`,
                             input: 'text',
                             inputPlaceholder: '請輸入玩家名字',
                             inputAttributes: {
@@ -705,7 +711,7 @@
                         Swal.fire({
                             icon: 'info',
                             title: '時間到',
-                            title: `最高分，你得到 ${score} 分`,
+                            text: `最高分，你得到 ${score} 分`,
                             input: 'text',
                             inputPlaceholder: '請輸入玩家名字',
                             inputAttributes: {
@@ -746,8 +752,8 @@
                     if (score > highscore_s.score) {
                         Swal.fire({
                             icon: 'info',
-                            title: '時間到',
-                            title: `最高分，你得到 ${score} 分`,
+                            title: '你死了',
+                            text: `最高分，你得到 ${score} 分`,
                             input: 'text',
                             inputPlaceholder: '請輸入玩家名字',
                             inputAttributes: {
@@ -767,7 +773,7 @@
                     } else {
                         Swal.fire({
                             icon: 'info',
-                            title: '時間到',
+                            title: '你死了',
                             text: `你得了${score}分`
                         })
                     }
@@ -844,7 +850,12 @@
                     $('#big').attr('src', `./images/timepotion.png`)
                     $('.content').hide()
                     $('.content').eq($('.small').index(this)).show()
-                } else {
+                } else if ($(this).attr('id') === 'heart') {
+                    $('#big').attr('src', `./images/heart.png`)
+                    $('.content').hide()
+                    $('.content').eq($('.small').index(this)).show()
+                }
+                else {
                     $('#big').attr('src', `./images/cat_${index}.png`)
                     $('.content').hide()
                     $('.content').eq($('.small').index(this)).show()
