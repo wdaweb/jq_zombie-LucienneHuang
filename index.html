@@ -408,6 +408,7 @@
     <audio id="meow" src="./music/meow.mp3"></audio>
     <audio id="angrymeow" src="./music/angrymeow.mp3"></audio>
     <audio id="potion" src="./music/potion.mp3"></audio>
+    <audio id="click" src="./music/click.mp3"></audio>
     <div id="title">
         <a href="index.html" alt="貓咪咖啡廳" title="貓咪咖啡廳">貓咪咖啡廳</a><br>
 
@@ -542,14 +543,19 @@
         $('#text-highscorename-s').text(highscore_s.name)
         $('#text-highscore-s').text(highscore_s.score)
         $('#btn-start').click(function () {
+            $('#click')[0].currentTime = 0
+            $('#click')[0].play()
             $('#btn-start').fadeOut();
             $('#box').css('display', 'block')
         })
         $('#btn-easy').click(function () {
+            $('#click')[0].currentTime = 0
+            $('#click')[0].play()
             $('#timer-text').css('display', 'block')
             $('#score-text').css('display', 'block')
             $('#box').css('display', 'none')
             $('#start').fadeOut();
+            $('#cafe')[0].currentTime = 0
             $('#cafe')[0].play()
             // 重設
             mode = 'easy'
@@ -644,6 +650,8 @@
         })
 
         $('#btn-survival').click(function () {
+            $('#click')[0].currentTime = 0
+            $('#click')[0].play()
             $('#timer-text').css('display', 'block')
             $('#score-text').css('display', 'block')
             $('#box').css('display', 'none')
@@ -821,9 +829,11 @@
             // 如果按到的貓咪的分數是負的
             if (parseInt(catScore[$(this).attr('alt').slice(-1)]) < 0) {
                 // 播放憤怒的貓叫聲
+                $('#angrymeow')[0].currentTime = 0
                 $('#angrymeow')[0].play()
             } else {
                 // 否則播放溫和的貓叫聲
+                $('#meow')[0].currentTime = 0
                 $('#meow')[0].play()
             }
             // 將點到的該貓咪消失
@@ -834,6 +844,7 @@
         })
         // 點選時間藥水，秒數+5s且點選的該藥水消失
         $('#game').on('click', '.timepotion', function () {
+            $('#potion')[0].currentTime = 0
             $('#potion')[0].play()
             countdown += 5
             $('#timer-text').text(countdown + 's')
@@ -846,6 +857,8 @@
         // 點選小圖，顯示大圖+該圖的文字敘述
         $('.small').each(function (index, img) {
             $(this).on('click', function () {
+                $('#click')[0].currentTime = 0
+                $('#click')[0].play()
                 if ($(this).attr('id') === 'timepotion') {
                     $('#big').attr('src', `./images/timepotion.png`)
                     $('.content').hide()
@@ -871,6 +884,8 @@
             })
         })
         $('#history').click(function () {
+            $('#click')[0].currentTime = 0
+            $('#click')[0].play()
             if ($('#score-list').css('display') === 'block') {
                 $('#score-list').css('display', 'none')
                 $('#score-list').removeClass('opacity')
