@@ -201,6 +201,11 @@
             cursor: url('./images/pat.png') 50 50, auto;
         }
 
+        #game:active {
+            cursor: url('./images/pat2.png') 50 50, auto;
+
+        }
+
         #timer-text {
             color: white;
             font-size: 60px;
@@ -528,7 +533,7 @@
         let timercat = 0
         let timershake = 0
         let timerpotion = 0
-        let mode = 'unknown'
+        let mode = ''
         // 最高分
         let highscore_n = localStorage.cat_n ? JSON.parse(localStorage.cat_n) : { name: '沒有人', score: 0 }
         let lowscore_n = localStorage.lowcat_n ? JSON.parse(localStorage.lowcat_n) : { name: '沒有人', score: 0 }
@@ -687,7 +692,7 @@
                     timercat = setInterval(function () {
                         cat.remove()
                     }, 10000)
-                    // 如果隨機數字大於18，會給一瓶藥水
+                    // 如果隨機數字大於18，會給一瓶藥水，然後移動他
                     if (random2 > 18) {
                         const timepotion = $(`<img src="./images/timepotion.png" class="timepotion" style="top:${top};left:${left};">`)
                         $('#game').append(timepotion)
@@ -803,7 +808,6 @@
             // 如果模式為survival且按到的貓咪分數是負的
             if (mode === 'survival' && parseInt(catScore[$(this).attr('alt').slice(-1)]) < 0) {
                 // 畫面+生命震動效果
-
                 $('.heart').addClass('shake')
                 $('#game').addClass('shake')
                 $('.heart').eq(life).remove()
@@ -870,7 +874,6 @@
                     $('.content').hide()
                     $('.content').eq($('.small').index(this)).show()
                 }
-
             })
             // 小圖的移入移出hover效果
             $('.small').mouseover(function () {
@@ -880,17 +883,18 @@
                 $(this).removeClass('hover').addClass('hovercancel')
             })
         })
+        // 如果點歷史紀錄
         $('#history').click(function () {
             $('#click')[0].currentTime = 0
             $('#click')[0].play()
+            // 如果歷史紀錄為顯示狀態，隱藏他
             if ($('#score-list').css('display') === 'block') {
                 $('#score-list').css('display', 'none')
                 $('#score-list').removeClass('opacity')
-
             } else {
+                // 否則，顯示他
                 $('#score-list').css('display', 'block')
                 $('#score-list').addClass('opacity')
-
             }
         })
     </script>
